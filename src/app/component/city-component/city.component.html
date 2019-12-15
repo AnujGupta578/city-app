@@ -1,0 +1,44 @@
+<div class="continer city-container">
+    <p class="list-title">City List</p>
+    <p class="list-tag">Please Select the list, You want to visit</p>
+    <mat-selection-list class="selection-list" *ngIf="isCityLoad">
+        <mat-list-option [selected]="city.isSelected" [tabindex]="i" *ngFor="let city of cities; let i = index;" (click)="selectCity(city, i)">
+            {{city.name}}
+        </mat-list-option>
+    </mat-selection-list>
+    <div class="load-more-btn">
+        <button mat-list-item (click)="loadMoreCity()" color="primary"> Load More </button>
+    </div>
+</div>
+
+<div class="section">
+    <mat-grid-list cols="4">
+        <mat-grid-tile *ngFor="let selectedCity of selectedCities">
+            <mat-card class="selected-city-card">
+                <mat-card-header>
+                    <mat-card-title>{{selectedCity.name}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-actions class="mat-action-btn-list">
+                    <button mat-button (click)="aboutCity(selectedCity)">About City</button>
+                    <button mat-button (click)="aboutWeather(selectedCity)">Weather</button>
+                    <button mat-button>Restraturants</button>
+                    <button mat-button>Things To Do</button>
+                </mat-card-actions>
+                <mat-card-content *ngIf="selectedCity.isWeather" class="weather-details-content">
+                    <h6>Weather Details</h6>
+                    <p>Feels like: {{selectedCity.weatherDetails.feelslike}}</p>
+                    <p>Humidity: {{selectedCity.weatherDetails.humidity}}</p>
+                    <p>Pressure: {{selectedCity.weatherDetails.pressure}}</p>
+                    <p>Temp: {{selectedCity.weatherDetails.temp}}</p>
+                    <p>Temp Max: {{selectedCity.weatherDetails.tempmax}}</p>
+                    <p>Temp Min: {{selectedCity.weatherDetails.tempmin}}</p>
+                    <p>Sunrise: {{selectedCity.weatherDetails.sunrise}}</p>
+                    <p>Sunset: {{selectedCity.weatherDetails.sunset}}</p>
+                    <p>Deg: {{selectedCity.weatherDetails.deg}}</p>
+                    <p>Speed: {{selectedCity.weatherDetails.speed}}</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+
+</div>
